@@ -36,6 +36,9 @@
 			</fieldset>
 		</form>
 	</div>
+	<div>
+	<a href="<%=request.getContextPath()%>/removeCustomerForm.jsp">회원 탈퇴</a>
+	</div>
 
 	<div>
 		<form id="employeeForm" method="post"
@@ -56,6 +59,9 @@
 				<button type="button" id="employeeBtn">스텝 로그인</button>
 			</fieldset>
 		</form>
+	</div>
+	<div>
+	<a href="<%=request.getContextPath()%>/removeEmployeeForm.jsp">스텝 탈퇴</a>
 	</div>
 </body>
 <script>
