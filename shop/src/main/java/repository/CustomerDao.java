@@ -9,6 +9,29 @@ import service.CustomerService;
 import vo.Customer;
 
 public class CustomerDao {
+	//회원가입
+	public boolean insertCustomer(Connection conn, Customer customer) throws SQLException {
+		int row = 0;
+		//
+		System.out.println(customer + " <-- Dao/customer");
+		String sql = "INSERT INTO customer(customer_id, customer_pass, customer_name, customer_address, customer_telephone, update_date, create_date) VALUES(?,?,?,?,?,NOW(),NOW())";
+		PreparedStatement stmt = null;
+		try {
+			stmt =conn.prepareStatement(sql);
+			stmt.setString(1, customer.getCustomerId());
+			stmt.setString(2, customer.getCustomerPass());
+			stmt.setString(3, customer.getCustomerName());
+			stmt.setString(4, customer.getCustomerAddress());
+			stmt.setString(5, customer.getCustomerTelephone());
+			row = stmt.executeUpdate();
+		}finally {
+			if(stmt!=null) {
+				stmt.close();
+			}
+		}
+		return true;
+	}
+	
 	// 탈퇴
 	// CustomerService.removeCustomer(Customer customer)가 호출
 	public int deleteCustomer(Connection conn, Customer customer) throws SQLException {
@@ -62,4 +85,6 @@ public class CustomerDao {
 		}
 		return loginCustomer;
 	}
+	
+	
 }

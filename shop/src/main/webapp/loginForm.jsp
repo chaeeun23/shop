@@ -37,6 +37,7 @@
 		</form>
 	</div>
 	<div>
+	<a href="<%=request.getContextPath()%>/addCustomerForm.jsp">고객 회원가입</a>
 	<a href="<%=request.getContextPath()%>/removeCustomerForm.jsp">회원 탈퇴</a>
 	</div>
 
@@ -61,6 +62,7 @@
 		</form>
 	</div>
 	<div>
+	<a href="<%=request.getContextPath()%>/addEmployeeForm.jsp">직원 회원가입</a>
 	<a href="<%=request.getContextPath()%>/removeEmployeeForm.jsp">스텝 탈퇴</a>
 	</div>
 </body>

@@ -10,6 +10,39 @@ import vo.Customer;
 import vo.Employee;
 
 public class EmployeeService {
+	//회원가입
+		public boolean addEmployee(Employee employee) {
+			//
+			System.out.println(employee + " <-- service/employee");
+			Connection conn=null;
+			try {
+				conn=new DBUtil().getConnection();
+				conn.setAutoCommit(false);
+				
+				EmployeeDao employeeDao = new EmployeeDao();
+				if(employeeDao.insertEmployee(conn, employee)) {
+					conn.commit();
+				};
+				
+		
+			}catch (Exception e) {
+				e.printStackTrace(); // 예외메세지를 콘솔에 띄움
+				try {
+					conn.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} finally {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return true;
+		}
+		
+		//탈퇴
 	public void removeEmployee(Employee employee) {
 		Connection conn = null;
 		try {

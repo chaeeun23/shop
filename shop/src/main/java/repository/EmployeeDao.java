@@ -10,6 +10,26 @@ import vo.Customer;
 import vo.Employee;
 
 public class EmployeeDao {
+	//회원가입
+		public boolean insertEmployee(Connection conn, Employee employee) throws SQLException {
+			int row = 0;
+			//
+			System.out.println(employee + " <-- Dao/employee");
+			String sql = "INSERT INTO employee(employee_id, employee_pass, employee_name, update_date, create_date) VALUES(?,?,?,NOW(),NOW())";
+			PreparedStatement stmt = null;
+			try {
+				stmt =conn.prepareStatement(sql);
+				stmt.setString(1, employee.getEmployeeId());
+				stmt.setString(2, employee.getEmployeePass());
+				stmt.setString(3, employee.getEmployeeName());
+				row = stmt.executeUpdate();
+			}finally {
+				if(stmt!=null) {
+					stmt.close();
+				}
+			}
+			return true;
+		}
 	// 탈퇴
 	// EmployeeService.removeEmployee(Employee employee)가 호출
 	public int deleteEmployee(Connection conn, Employee employee) throws SQLException {

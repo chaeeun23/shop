@@ -7,6 +7,38 @@ import repository.OutIdDao;
 import vo.Customer;
 
 public class CustomerService {
+	//회원가입
+	public boolean addCustomer(Customer customer) {
+		//
+		System.out.println(customer + " <-- service/customer");
+
+		Connection conn=null;
+		try {
+			conn=new DBUtil().getConnection();
+			conn.setAutoCommit(false);
+			
+			CustomerDao customerDao = new CustomerDao();
+			if(customerDao.insertCustomer(conn, customer)) {
+				conn.commit();
+			};
+			
+	
+		}catch (Exception e) {
+			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
 	// 탈퇴
 	public void removeCustomer(Customer customer) {
 		//
@@ -73,4 +105,6 @@ public class CustomerService {
 		}
 		return loginCustomer;
 	}
+	
+	
 }
