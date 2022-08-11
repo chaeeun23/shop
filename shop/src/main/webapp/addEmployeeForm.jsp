@@ -61,10 +61,10 @@
 				success : function(json) {
 					if(json == 'y') {
 						alert('사용가능한 아이디 입니다.');
-						$('#customerId').val($('#employeeCkId').val());
+						$('#employeeId').val($('#employeeCkId').val());
 					} else {
 						alert('이미 사용중인 아이디 입니다.');
-						$('#customerId').val('');
+						$('#employeeId').val('');
 					}
 				}
 			});
