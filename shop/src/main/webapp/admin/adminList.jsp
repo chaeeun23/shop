@@ -15,7 +15,7 @@
 	EmployeeService employeeService = new EmployeeService();
 	ArrayList<Employee> list = new ArrayList<Employee>();
 	list = employeeService.getEmployeeList(rowPerPage, currentPage);	// list
-	lastPage = employeeService.getlastPage(rowPerPage);					// 페이징
+	lastPage = employeeService.getEmployeeLastPage(rowPerPage);					// 페이징
 %>
 
 <!DOCTYPE html>

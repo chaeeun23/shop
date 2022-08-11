@@ -59,7 +59,8 @@ System.out.println("adminGoodsOne.jsp map : " + map.toString());
 		<tr>
 			<th>이미지이름</th>
 			<td><%=map.get("filename")%></td>
-			<td><img src="<%=request.getContextPath()%>/upload/<%=map.get("filename")%>"></td>
+			<td><img
+				src="<%=request.getContextPath()%>/upload/<%=map.get("filename")%>"></td>
 		</tr>
 		<tr>
 			<th>이미지원본이름</th>
@@ -70,5 +71,11 @@ System.out.println("adminGoodsOne.jsp map : " + map.toString());
 			<td><%=map.get("contentType")%></td>
 		</tr>
 	</table>
+	<div>
+		<a
+			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>"
+			>수정</a> <a
+			href="<%=request.getContextPath()%>/">삭제</a>
+	</div>
 </body>
 </html>
