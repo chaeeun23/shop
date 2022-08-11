@@ -9,10 +9,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<div>
-확인
-</div>
-
 	<div>
 		<%
 		String errorMsg = request.getParameter("errorMsg");

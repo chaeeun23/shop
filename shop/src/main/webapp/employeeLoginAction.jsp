@@ -31,7 +31,9 @@ if (session.getAttribute("loginEmployee") == null) { // 로그인실패
 	session.setAttribute("loginEmployee", loginEmployee);
 	session.setAttribute("user", "employee");
 	session.setAttribute("id", loginEmployee.getEmployeeId());
+	session.setAttribute("pw", employee.getEmployeePass());
 	session.setAttribute("name", loginEmployee.getEmployeeName());
-	response.sendRedirect(request.getContextPath() + "/index.jsp");
+	session.setAttribute("active", employee.getActive());
+	response.sendRedirect(request.getContextPath() + "/admin/adminList.jsp");
 }
 %>

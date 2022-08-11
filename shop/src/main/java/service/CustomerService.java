@@ -1,16 +1,22 @@
 package service;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import repository.CustomerDao;
 import repository.OutIdDao;
 import vo.Customer;
 
 public class CustomerService {
-	//회원가입
-	public boolean addCustomer(Customer customer) {
+	private CustomerDao customerDao;
+	
+	//회원가입(insert)
+	public boolean addCustomer(Customer paramCustomer) {
+		boolean result = true;
 		//
-		System.out.println(customer + " <-- service/customer");
+		System.out.println(paramCustomer + " <-- CustomerService/paramCustomer");
 
 		Connection conn=null;
 		try {
@@ -18,11 +24,11 @@ public class CustomerService {
 			conn.setAutoCommit(false);
 			
 			CustomerDao customerDao = new CustomerDao();
-			if(customerDao.insertCustomer(conn, customer)) {
-				conn.commit();
-			};
-			
-	
+			if(customerDao.insertCustomer(conn, paramCustomer) != 1) {
+				result = false;
+				throw new Exception();	
+			}
+			conn.commit();
 		}catch (Exception e) {
 			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
 			try {
@@ -37,12 +43,12 @@ public class CustomerService {
 				e.printStackTrace();
 			}
 		}
-		return true;
+		return result;
 	}
-	// 탈퇴
-	public void removeCustomer(Customer customer) {
+	// 탈퇴(delete)
+	public void removeCustomer(Customer paramCustomer) {
 		//
-		System.out.println(customer + " <-- service/customer");
+		System.out.println(paramCustomer + " <-- customerService/paramCustomer");
 
 		Connection conn = null;
 		try {
@@ -50,13 +56,12 @@ public class CustomerService {
 			conn.setAutoCommit(false); // executeUpdate()실행시 자동 커밋 안되게 잠금
 
 			CustomerDao customerDao = new CustomerDao();
-			if (customerDao.deleteCustomer(conn, customer) == 1) {
+			if (customerDao.deleteCustomer(conn, paramCustomer) == 1) {
 				OutIdDao outIdDao = new OutIdDao();
-				if (outIdDao.insertOutId(conn, customer.getCustomerId()) != 1) {
+				if (outIdDao.insertOutId(conn, paramCustomer.getCustomerId()) != 1) {
 					throw new Exception();
 				}
 			}
-
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
@@ -75,19 +80,18 @@ public class CustomerService {
 	}
 
 	// 로그인
-	public Customer getCustomerByIdAndPw(Customer customer) {
+	public Customer getCustomerByIdAndPw(Customer paraCustomer ) {
 		Connection conn = null;
-		Customer loginCustomer = null;
+		Customer customer  = null;
 		try {
 			conn = new DBUtil().getConnection();
 			conn.setAutoCommit(false); // executeQuery()실행시 자동 커밋 안되게 잠금
 
 			CustomerDao customerDao = new CustomerDao();
-			loginCustomer = customerDao.selectCustomerByIdAndPw(conn, customer);
-			if (loginCustomer == null) {
+			customer  = customerDao.selectCustomerByIdAndPw(conn, paraCustomer);
+			if (customer  == null) {
 				throw new Exception();
 			}
-
 			conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
@@ -103,7 +107,7 @@ public class CustomerService {
 				e.printStackTrace();
 			}
 		}
-		return loginCustomer;
+		return customer ;
 	}
 	
 	
