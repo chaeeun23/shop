@@ -98,7 +98,7 @@ public class EmployeeDao {
 		int row = 0;
 		//
 		System.out.println(paraEmployee + " <-- Dao/paraEmployee");
-		String sql = "INSERT INTO employee(employee_id, employee_pass, employee_name, update_date, create_date) VALUES(?,?,?,NOW(),NOW())";
+		String sql = "INSERT INTO employee(employee_id, employee_pass, employee_name, update_date, create_date) VALUES(?,PASSWORD(?),?,NOW(),NOW())";
 		PreparedStatement stmt = null;
 		try {
 			stmt = conn.prepareStatement(sql);

@@ -10,7 +10,7 @@
 	GoodsService goodsService = new GoodsService();
 	List<Goods> list = new ArrayList<Goods>();
 	list = goodsService.getGoodsListByPage(rowPerPage, currentPage); //list보여주기
-	lastPage = goodsService.getLastPage(rowPerPage);
+	lastPage = goodsService.getGoodsLastPage(rowPerPage);
 %>
 <!DOCTYPE html>
 <html>

@@ -13,7 +13,7 @@ public class CustomerDao {
 		int row = 0;
 		//
 		System.out.println(paraCustomer + " <-- Dao/customer");
-		String sql = "INSERT INTO customer(customer_id, customer_pass, customer_name, customer_address, customer_telephone, update_date, create_date) VALUES(?,?,?,?,?,NOW(),NOW())";
+		String sql = "INSERT INTO customer(customer_id, customer_pass, customer_name, customer_address, customer_telephone, update_date, create_date) VALUES(?,PASSWORD(?),?,?,?,NOW(),NOW())";
 		PreparedStatement stmt = null;
 		try {
 			stmt =conn.prepareStatement(sql);
