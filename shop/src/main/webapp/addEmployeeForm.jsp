@@ -10,36 +10,19 @@
 </head>
 <body>
 <h1>직원 회원가입</h1>
-	<%
-	if (request.getParameter("errorMsg") != null) {
-	%>
-	<div><%=request.getParameter("errorMsg")%></div>
-	<%
-	}
-	%>
 	<!-- id check form -->
-	<form action="<%=request.getContextPath()%>/idCheckAction.jsp"
-		method="post">
 		<div>
-			ID체크 <input type="text" name="employeeCkId">
-			<button type="submit">아이디 중간검사</button>
+			ID체크 <input type="text" name="employeeCkId" id="employeeCkId">
+			<button type="button" id="idckBtn">아이디 중간검사</button>
 		</div>
-	</form>
-
 	<!-- 직원가입 form -->
-	<%
-	String ckId = "";
-	if (request.getParameter("ckId") != null) { //idCheckAction에서 ckId 값을 받아왔을때(service에서 true값이 넘어올때)
-		ckId = request.getParameter("ckId");
-	}
-	%>
 	<form id="employeeForm"
 		action="<%=request.getContextPath()%>/addEmployeeAction.jsp" method="post">
 		<table border="1">
 			<tr>
 				<td>Id</td>
 				<td><input type="text" name="employeeId" id="employeeId"
-					value="<%=ckId%>" readonly="readonly"></td>
+					 readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>Pass</td>
@@ -64,6 +47,27 @@
 			alert('직원이름을 입력하세요');
 		} else {
 			employeeForm.submit();
+		}
+	});
+	//아이디중복검사
+	$('#idckBtn').click(function() {
+		if($('#employeeCkId').val().length < 4) {
+			alert('ID는 4자 이상 입니다.');
+		} else {
+			$.ajax({
+				url : '/shop/idckController',
+				type : 'post',
+				data : {idck : $('#employeeCkId').val()},
+				success : function(json) {
+					if(json == 'y') {
+						alert('사용가능한 아이디 입니다.');
+						$('#customerId').val($('#employeeCkId').val());
+					} else {
+						alert('이미 사용중인 아이디 입니다.');
+						$('#customerId').val('');
+					}
+				}
+			});
 		}
 	});
 </script>

@@ -15,7 +15,7 @@ if (request.getParameter("customerCkId") != null) {
 }
 
 SignService signService = new SignService();
-boolean result = signService.idCheck(ckId);
+boolean result = signService.getidCheck(ckId);
 
 //
 System.out.println(result + " <-- idCheckAction/result");

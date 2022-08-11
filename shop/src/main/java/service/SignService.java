@@ -10,7 +10,7 @@ public class SignService {
 	//return
 	//true : 사용가능한 아이디
 	//false : 사용불가능한 아이디
-	public boolean idCheck(String id) throws SQLException {
+	public boolean getidCheck(String id) throws SQLException {
 		boolean result = false;
 		SignDao signDao = new SignDao();
 		this.signDao = new SignDao();

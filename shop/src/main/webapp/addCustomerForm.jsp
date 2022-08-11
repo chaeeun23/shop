@@ -9,37 +9,21 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>회원가입</h1>
-	<%
-	if (request.getParameter("errorMsg") != null) {
-	%>
-	<div><%=request.getParameter("errorMsg")%></div>
-	<%
-	}
-	%>
+<h1>고객 회원가입</h1>
 	<!-- id check form -->
-	<form action="<%=request.getContextPath()%>/idCheckAction.jsp"
-		method="post">
 		<div>
-			ID체크 <input type="text" name="customerCkId">
-			<button type="submit">아이디 중간검사</button>
+			ID체크 <input type="text" name="customerCkId" id="customerCkId">
+			<button type="button" id="idckBtn">아이디 중간검사</button>
 		</div>
-	</form>
 
 	<!-- 고객가입 form -->
-	<%
-	String ckId = "";
-	if (request.getParameter("ckId") != null) { //idCheckAction에서 ckId 값을 받아왔을때(service에서 true값이 넘어올때)
-		ckId = request.getParameter("ckId");
-	}
-	%>
 	<form id="customerForm"
 		action="<%=request.getContextPath()%>/addCustomerAction.jsp" method="post">
 		<table border="1">
 			<tr>
 				<td>customerId</td>
 				<td><input type="text" name="customerId" id="customerId"
-					value="<%=ckId%>" readonly="readonly"></td>
+					 readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>customerPass</td>
@@ -78,6 +62,27 @@
 			alert('고객전화번호를 입력하세요');
 		} else {
 			customerForm.submit();
+		}
+	});
+	//아이디중복검사
+	$('#idckBtn').click(function() {
+		if($('#customerCkId').val().length < 4) {
+			alert('ID는 4자 이상 입니다.');
+		} else {
+			$.ajax({
+				url : '/shop/idckController',
+				type : 'post',
+				data : {idck : $('#customerCkId').val()},
+				success : function(json) {
+					if(json == 'y') {
+						alert('사용가능한 아이디 입니다.');
+						$('#customerId').val($('#customerCkId').val());
+					} else {
+						alert('이미 사용중인 아이디 입니다.');
+						$('#customerId').val('');
+					}
+				}
+			});
 		}
 	});
 </script>
