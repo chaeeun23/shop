@@ -21,6 +21,13 @@
 			action="<%=request.getContextPath()%>/customerLoginAction.jsp">
 			<fieldset>
 				<legend>쇼핑몰 고객 로그인</legend>
+				<%
+				if (request.getParameter("errorMsg1") != null) {
+				%>
+				<span style="color: red"><%=request.getParameter("errorMsg1")%></span>
+				<%
+				}
+				%>
 				<table border="1">
 					<tr>
 						<td>ID</td>
@@ -37,8 +44,9 @@
 		</form>
 	</div>
 	<div>
-	<a href="<%=request.getContextPath()%>/addCustomerForm.jsp">고객 회원가입</a>
-	<a href="<%=request.getContextPath()%>/removeCustomerForm.jsp">회원 탈퇴</a>
+		<a href="<%=request.getContextPath()%>/addCustomerForm.jsp">고객
+			회원가입</a> <a href="<%=request.getContextPath()%>/removeCustomerForm.jsp">회원
+			탈퇴</a>
 	</div>
 
 	<div>
@@ -46,6 +54,13 @@
 			action="<%=request.getContextPath()%>/employeeLoginAction.jsp">
 			<fieldset>
 				<legend>쇼핑몰 스텝 로그인</legend>
+				<%
+				if (request.getParameter("errorMsg2") != null) {
+				%>
+				<span style="color: red"><%=request.getParameter("errorMsg2")%></span>
+				<%
+				}
+				%>
 				<table border="1">
 					<tr>
 						<td>ID</td>
@@ -62,8 +77,9 @@
 		</form>
 	</div>
 	<div>
-	<a href="<%=request.getContextPath()%>/addEmployeeForm.jsp">직원 회원가입</a>
-	<a href="<%=request.getContextPath()%>/removeEmployeeForm.jsp">스텝 탈퇴</a>
+		<a href="<%=request.getContextPath()%>/addEmployeeForm.jsp">직원
+			회원가입</a> <a href="<%=request.getContextPath()%>/removeEmployeeForm.jsp">스텝
+			탈퇴</a>
 	</div>
 </body>
 <script>
