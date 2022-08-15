@@ -12,6 +12,60 @@ import java.util.Map;
 import vo.Orders;
 
 public class OrdersDao {
+	// 주문리스트 마지막페이지
+		public int selectOrdersLastPageByCustomer(Connection conn, String customerId, int rowPerPage) throws SQLException {
+			int totalCount = 0;
+			String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ?";
+			
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, customerId);
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					totalCount = rs.getInt("COUNT(*)");
+				}
+			} finally {
+				if(rs != null) {
+					rs.close();
+				}
+				if(stmt != null) {
+					stmt.close();
+				}
+			}
+			
+			return totalCount;
+		}
+		
+		// 주문리스트 마지막페이지
+		public int selectOrdersLastPage(Connection conn, int rowPerPage) throws SQLException {
+			int totalCount = 0;
+			String sql = "SELECT COUNT(*) FROM orders";
+			
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			
+			try {
+				stmt = conn.prepareStatement(sql);
+				rs = stmt.executeQuery();
+
+				if (rs.next()) {
+					totalCount = rs.getInt("COUNT(*)");
+				}
+			} finally {
+				if(rs != null) {
+					rs.close();
+				}
+				if(stmt != null) {
+					stmt.close();
+				}
+			}
+			
+			return totalCount;
+		}
 	// 고객 한명의 주문목록 (관리자, 고객)
 	public List<Map<String, Object>> selectOrdersListByCustomer(Connection conn, String customerId, int rowPerPage,
 			int beginRow) throws SQLException {

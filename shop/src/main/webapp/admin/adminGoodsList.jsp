@@ -4,13 +4,36 @@
 <%@page import="service.GoodsService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	int rowPerPage = 2; 
-	int currentPage = 1; 
-	int lastPage = 0;
+	request.setCharacterEncoding("utf-8");
+	if (session.getAttribute("loginEmployee") == null && session.getAttribute("active").equals("Y")) {
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		return;
+	}	
+	// 현재 페이지
+	int currentPage = 1;
+	int lastPage;
+	if (request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	// 화면에 띄울 페이지수
+	final int ROW_PER_PAGE = 10;
+	
+	// list값 및 lastPage 계산
 	GoodsService goodsService = new GoodsService();
 	List<Goods> list = new ArrayList<Goods>();
-	list = goodsService.getGoodsListByPage(rowPerPage, currentPage); //list보여주기
-	lastPage = goodsService.getGoodsLastPage(rowPerPage);
+	
+	list = goodsService.getGoodsListByPage(ROW_PER_PAGE, currentPage);	
+	lastPage = goodsService.getGoodsLastPage(ROW_PER_PAGE);
+	
+	// 페이지 번호에 필요한 변수 계산
+	int startPage = ((currentPage - 1) / ROW_PER_PAGE) * ROW_PER_PAGE + 1;
+	int endPage = (((currentPage - 1) / ROW_PER_PAGE) + 1) * ROW_PER_PAGE;
+	
+	if(list == null) {
+		response.sendRedirect(request.getContextPath() + "/admin/adminIndex.jsp");
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +42,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="margin-bottom : 40px">
+	<div>
 		<a href="<%=request.getContextPath()%>/admin/adminIndex.jsp">사원관리</a>
 		<a href="<%=request.getContextPath()%>/admin/adminGoodsList.jsp">상품관리</a><!-- 상품목록/등록/수정/삭제(주문이 없는경우) -->
 		<a href="<%=request.getContextPath()%>/admin/adminOrderList.jsp">주문관리</a><!-- 주문목록/수정 -->
@@ -48,7 +71,27 @@
 					<td><%=g.getGoodsPrice()%></td>
 					<td><%=g.getUpdateDate()%></td>
 					<td><%=g.getCreateDate()%></td>
-					<td><%=g.getSoldOut()%></td>
+					<td>
+									<form action="<%=request.getContextPath()%>/admin/modifyGoodsSoldOutAction.jsp" method="post">
+										<input type="hidden" name="goodsNo" value="<%=g.getGoodsNo()%>">
+										<select name="soldOut">
+											<%
+												if(g.getSoldOut().equals("N")) {
+											%>
+													<option value="Y">Y</option>
+													<option value="N" selected="selected">N</option>
+											<%
+												} else {
+											%>
+													<option value="Y" selected="selected">Y</option>
+													<option value="N">N</option>
+											<%
+												}
+											%>
+										</select>
+									<button type="submit">UPDATE</button>
+									</form>
+								</td>
 				</tr>
 				<%
 					}

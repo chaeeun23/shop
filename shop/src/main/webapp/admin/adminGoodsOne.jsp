@@ -75,7 +75,7 @@ System.out.println("adminGoodsOne.jsp map : " + map.toString());
 		<a
 			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>"
 			>수정</a> <a
-			href="<%=request.getContextPath()%>/">삭제</a>
+			href="<%=request.getContextPath()%>/admin/deleteGoodsAction.jsp?goodsNo=<%=goodsNo%>">삭제</a>
 	</div>
 </body>
 </html>

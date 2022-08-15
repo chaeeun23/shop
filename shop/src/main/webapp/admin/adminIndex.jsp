@@ -85,7 +85,7 @@ int endPage = (((currentPage - 1) / ROW_PER_PAGE) + 1) * ROW_PER_PAGE;
 					<td><%=e.getCreateDate()%></td>
 					<td>
 						<form
-							action="<%=request.getContextPath()%>/admin/updateEmployeeActiveAction.jsp"
+							action="<%=request.getContextPath()%>/admin/modifyEmployeeActiveAction.jsp"
 							method="post">
 							<input type="hidden" name="employeeId"
 								value="<%=e.getEmployeeId()%>"> <select name="active">
