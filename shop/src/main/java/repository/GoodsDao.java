@@ -13,6 +13,23 @@ import java.util.Map;
 import vo.Goods;
 
 public class GoodsDao {
+	// 상품삭제
+		public int deleteGoodsOne(Connection conn, int goodsNo) throws SQLException {
+			int row = 0;
+			PreparedStatement stmt = null;
+			String sql = "DELETE FROM goods WHERE goods_no = ?";
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, goodsNo);
+				row = stmt.executeUpdate();
+			} finally {
+				if (stmt != null) {
+					stmt.close();
+				}
+			}
+			return row;
+		}
+		
 	//고객 상품리스트 페이지에서 사용
 	public List<Map<String, Object>> selectCustomerGoodsListByPage(Connection conn, int rowPerPage, int beginRow) throws SQLException{
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();

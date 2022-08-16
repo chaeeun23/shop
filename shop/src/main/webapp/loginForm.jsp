@@ -21,7 +21,7 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 .form-control {
-	width: 15%;
+	width: 30%;
 }
 
 legend {

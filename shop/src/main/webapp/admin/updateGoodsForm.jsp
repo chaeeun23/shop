@@ -66,7 +66,7 @@ if (map == null) {
 		</table>
 		<button type="submit">등록</button>
 		<a
-			href="<%=request.getContextPath()%>/admin/admingoodsOne.jsp?goodsNo=<%=goodsNo%>">취소</a>
+			href="<%=request.getContextPath()%>/admin/adminGoodsOne.jsp?goodsNo=<%=goodsNo%>">취소</a>
 	</form>
 </body>
 </html>

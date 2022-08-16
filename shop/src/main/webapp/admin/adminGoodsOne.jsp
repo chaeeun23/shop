@@ -72,7 +72,7 @@ Map<String, Object> map = goodsService.getGoodsAndImgOne(goodsNo);
 		<a
 			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>"
 			>수정</a> <a
-			href="<%=request.getContextPath()%>/admin/deleteGoodsAction.jsp?goodsNo=<%=goodsNo%>">삭제</a>
+			href="<%=request.getContextPath()%>/admin/deleteGoods.jsp?goodsNo=<%=goodsNo%>">삭제</a>
 	</div>
 </body>
 </html>

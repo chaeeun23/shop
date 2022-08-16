@@ -5,17 +5,49 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import repository.CustomerDao;
 import repository.GoodsDao;
 import repository.GoodsImgDao;
-import vo.Customer;
 import vo.Goods;
 import vo.GoodsImg;
 
 public class GoodsService {
 	private GoodsDao goodsDao; 
 	private GoodsImgDao goodsImgDao;
-	
+	// 상품삭제
+	public int removeGoods(int goodsNo) throws SQLException {
+		Connection conn = null;
+		
+		int imgRow = 0;
+		int row = 0;
+		try {
+			conn = new DBUtil().getConnection();
+			
+			goodsDao = new GoodsDao();
+			goodsImgDao = new GoodsImgDao();
+			
+			conn.setAutoCommit(false); // executeUpdate() 실행 시 자동 커밋을 막음
+			imgRow = goodsImgDao.deleteGoodsOneImg(conn, goodsNo);
+			if (imgRow != 0) { 
+				row = goodsDao.deleteGoodsOne(conn, goodsNo);
+				if (row == 0) {
+					throw new Exception(); 
+				}
+			}
+			conn.commit();
+		} catch (Exception e) { 
+			e.printStackTrace(); // console에 예외메세지 출력
+			try {
+				conn.rollback(); 
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		return row;
+	}
 	
 	// 상품수정
 	public int modifyGoods(Goods goods, GoodsImg goodsImg) {
