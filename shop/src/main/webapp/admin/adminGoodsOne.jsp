@@ -14,15 +14,12 @@ if (session.getAttribute("id") == null) {
 // 값 받기
 int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
 // 디버깅
-System.out.println("adminGoodsOne.jsp goodsNo : " + goodsNo);
+System.out.println(goodsNo + " <-- adminGoodsOne/goodsNo");
 
-// 메서드를 위한 객체생성
 GoodsService goodsService = new GoodsService();
 
-// 상세페이지 메서드
 Map<String, Object> map = goodsService.getGoodsAndImgOne(goodsNo);
-// 디버깅
-System.out.println("adminGoodsOne.jsp map : " + map.toString());
+
 %>
 <!DOCTYPE html>
 <html>

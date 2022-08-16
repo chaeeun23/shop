@@ -98,8 +98,11 @@
 				%>
 			</tbody>
 		</table>
+		<div>
+			<a href="<%=request.getContextPath()%>/admin/addGoodsForm.jsp">새상품등록</a>
+		</div>
+		
 		<!-- 페이지 이전 다음 -->
-
 		<%
 			if(currentPage > 1){ //현재페이지가 1보다 클 경우(1페이지가 아닐경우)
 		%>

@@ -22,7 +22,7 @@ if (session.getAttribute("loginCustomer") == null && session.getAttribute("login
 	<%=session.getAttribute("id")%>
 	<!-- 로그인 아이디 -->
 	<br>
-	<a href="<%=request.getContextPath()%>/CustomerOne.jsp">고객정보</a>
+	<a href="<%=request.getContextPath()%>/customerOne.jsp">고객정보</a>
 	<%
 	if (session.getAttribute("active") != null && session.getAttribute("active").equals("Y")) {
 	%>
