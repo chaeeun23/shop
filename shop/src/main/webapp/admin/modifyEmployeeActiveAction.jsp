@@ -17,5 +17,5 @@
 	employeeService.modifyEmployeeActive(employee);
 	
 	
-	response.sendRedirect(request.getContextPath() + "/admin/adminIndex.jsp");
+	response.sendRedirect(request.getContextPath() + "/admin/adminEmployeeIndex.jsp");
 %>

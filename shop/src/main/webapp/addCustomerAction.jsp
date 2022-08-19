@@ -9,6 +9,7 @@ String customerId = request.getParameter("customerId");
 String customerPass = request.getParameter("customerPass");
 String customerName = request.getParameter("customerName");
 String customerAddress = request.getParameter("customerAddress");
+String customerDetailAddress = request.getParameter("customerDetailAddr");
 String customerTelephone = request.getParameter("customerTelephone");
 
 Customer customer = new Customer();
@@ -16,6 +17,7 @@ customer.setCustomerId(customerId);
 customer.setCustomerPass(customerPass);
 customer.setCustomerName(customerName);
 customer.setCustomerAddress(customerAddress);
+customer.setCustomerDetailAddress(customerDetailAddress);
 customer.setCustomerTelephone(customerTelephone);
 
 CustomerService customerService = new CustomerService();

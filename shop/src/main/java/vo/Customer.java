@@ -5,6 +5,7 @@ public class Customer {
 	private String customerPass;
 	private String customerName;
 	private String customerAddress;
+	private String customerDetailAddress;
 	private String customerTelephone;
 	private String updateDate;
 	private String createDate;
@@ -32,6 +33,12 @@ public class Customer {
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
 	}
+	public String getCustomerDetailAddress() {
+		return customerDetailAddress;
+	}
+	public void setCustomerDetailAddress(String customerDetailAddress) {
+		this.customerDetailAddress = customerDetailAddress;
+	}
 	public String getCustomerTelephone() {
 		return customerTelephone;
 	}
@@ -53,9 +60,11 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerPass=" + customerPass + ", customerName="
-				+ customerName + ", customerAddress=" + customerAddress + ", customerTelephone=" + customerTelephone
-				+ ", updateDate=" + updateDate + ", createDate=" + createDate + "]";
+				+ customerName + ", customerAddress=" + customerAddress + ", customerDetailAddress="
+				+ customerDetailAddress + ", customerTelephone=" + customerTelephone + ", updateDate=" + updateDate
+				+ ", createDate=" + createDate + "]";
 	}
+	
 	
 	
 }

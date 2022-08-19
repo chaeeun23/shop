@@ -37,7 +37,7 @@ legend {
 	margin-bottom: 2rem;
 }
 fieldset{
-    margin: 100px 600px;
+    margin: 50px auto; 
 }
 </style>
 </head>

@@ -5,36 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/morph/bootstrap.min.css"
+	integrity="sha512-InMdlCLdAnY6hWsQHiRyh62zyUi7rbdK2Qtwp+QBJFm4fTSzAYCLxMCuaKrUZgbcu9/dX4aZpyy2IPOrQ6n7PA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+<style>
+.form-control {
+	width: 30%;
+}
+</style>
 <body>
-<h1>직원 회원가입</h1>
+<h2>직원 회원가입</h2>
 	<!-- id check form -->
-		<div>
-			ID체크 <input type="text" name="employeeCkId" id="employeeCkId">
-			<button type="button" id="idckBtn">아이디 중간검사</button>
+		<div class="form-group">
+			ID체크 <input type="text" name="employeeCkId" id="employeeCkId" class="form-control">
+			<button type="button" id="idckBtn" class="btn btn-secondary btn-sm">아이디 중간검사</button>
 		</div>
 	<!-- 직원가입 form -->
 	<form id="employeeForm"
 		action="<%=request.getContextPath()%>/addEmployeeAction.jsp" method="post">
-		<table border="1">
-			<tr>
-				<td>Id</td>
-				<td><input type="text" name="employeeId" id="employeeId"
-					 readonly="readonly"></td>
-			</tr>
-			<tr>
-				<td>Pass</td>
-				<td><input type="password" name="employeePass"
-					id="employeePass"></td>
-			</tr>
-			<tr>
-				<td>Name</td>
-				<td><input type="text" name="employeeName" id="employeeName"></td>
-			</tr>
-		</table>
-		<button type="button" id="employeeBtn">회원가입</button>
+		<div>
+			<div>
+				employeeId
+				<input type="text" name="employeeId" id="employeeId"
+					 readonly="readonly" class="form-control">
+			</div>
+			<div>
+				employeePass
+				<input type="password" name="employeePass"
+					id="employeePass" class="form-control">
+			</div>
+			<div>
+				employeeName
+				<input type="text" name="employeeName" id="employeeName" class="form-control">
+			</div>
+		</div>
+		<hr>
+		<button type="button" id="employeeBtn" class="btn btn-secondary" >회원가입</button>
 	</form>
 </body>
 <script>

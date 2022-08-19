@@ -26,7 +26,7 @@ public class SignController extends HttpServlet {
 		
 		this.signService = new SignService();
 		
-		String ckId = request.getParameter("ckId");
+		String ckId = request.getParameter("customerCkId");
 		System.out.println(ckId + " <-- SignController/ckId");
 		
 		boolean id = false;

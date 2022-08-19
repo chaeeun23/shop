@@ -33,7 +33,7 @@ public class EmployeeDao {
 
 	}
 
-	// 페이징,상품리스트 마지막 페이지
+	//사원리스트 마지막 페이지
 	public int selectEmployeeLastPage(Connection conn, int rowPerPage) throws SQLException {
 		String sql = "SELECT COUNT(*) FROM employee";
 		PreparedStatement stmt = null;

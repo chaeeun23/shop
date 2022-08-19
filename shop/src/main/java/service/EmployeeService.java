@@ -80,7 +80,7 @@ public class EmployeeService {
 		return list;
 	}
 	
-	// 상품 마지막 페이지
+	// 사원 마지막 페이지
 		public int getEmployeeLastPage(int rowPerPage) {
 			int lastPage = 0;
 			int totalCount = 0;

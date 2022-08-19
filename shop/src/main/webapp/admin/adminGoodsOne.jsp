@@ -19,15 +19,25 @@ System.out.println(goodsNo + " <-- adminGoodsOne/goodsNo");
 GoodsService goodsService = new GoodsService();
 
 Map<String, Object> map = goodsService.getGoodsAndImgOne(goodsNo);
-
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/morph/bootstrap.min.css"
+	integrity="sha512-InMdlCLdAnY6hWsQHiRyh62zyUi7rbdK2Qtwp+QBJFm4fTSzAYCLxMCuaKrUZgbcu9/dX4aZpyy2IPOrQ6n7PA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+</style>
 </head>
 <body>
+	<h3>GOODS DETAIL</h3>
 	<table>
 		<tr>
 			<th>상품번호</th>
@@ -68,11 +78,13 @@ Map<String, Object> map = goodsService.getGoodsAndImgOne(goodsNo);
 			<td><%=map.get("contentType")%></td>
 		</tr>
 	</table>
+	<hr>
 	<div>
 		<a
-			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>"
-			>수정</a> <a
-			href="<%=request.getContextPath()%>/admin/deleteGoods.jsp?goodsNo=<%=goodsNo%>">삭제</a>
+			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>" class="btn btn-outline-primary">수정</a>
+		<a
+			href="<%=request.getContextPath()%>/admin/deleteGoods.jsp?goodsNo=<%=goodsNo%>" class="btn btn-outline-danger">삭제</a>
+		<a href="<%=request.getContextPath()%>/admin/adminGoodsList.jsp" class="btn btn-outline-secondary">상품목록</a>
 	</div>
 </body>
 </html>

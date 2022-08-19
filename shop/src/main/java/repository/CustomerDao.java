@@ -13,7 +13,7 @@ public class CustomerDao {
 		int row = 0;
 		//
 		System.out.println(paraCustomer + " <-- Dao/customer");
-		String sql = "INSERT INTO customer(customer_id, customer_pass, customer_name, customer_address, customer_telephone, update_date, create_date) VALUES(?,PASSWORD(?),?,?,?,NOW(),NOW())";
+		String sql = "INSERT INTO customer(customer_id, customer_pass, customer_name, customer_address, customer_detail_address, customer_telephone, update_date, create_date) VALUES(?,PASSWORD(?),?,?,?,?,NOW(),NOW())";
 		PreparedStatement stmt = null;
 		try {
 			stmt =conn.prepareStatement(sql);
@@ -21,7 +21,8 @@ public class CustomerDao {
 			stmt.setString(2, paraCustomer.getCustomerPass());
 			stmt.setString(3, paraCustomer.getCustomerName());
 			stmt.setString(4, paraCustomer.getCustomerAddress());
-			stmt.setString(5, paraCustomer.getCustomerTelephone());
+			stmt.setString(5, paraCustomer.getCustomerDetailAddress());
+			stmt.setString(6, paraCustomer.getCustomerTelephone());
 			row = stmt.executeUpdate();
 		}finally {
 			if(stmt!=null) {
@@ -56,7 +57,7 @@ public class CustomerDao {
 		}
 		return row;
 	}
-
+//////////////////////////////////////////////////////////////////////////////
 	public Customer selectCustomerByIdAndPw(Connection conn, Customer login) throws Exception {
 		Customer customer  = null;
 
@@ -85,5 +86,28 @@ public class CustomerDao {
 		return customer;
 	}
 	
+	//사원리스트 마지막 페이지
+	public int selectCustomerLastPage(Connection conn, int rowPerPage) throws SQLException {
+		String sql = "SELECT COUNT(*) FROM customer";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int totalCount = 0;
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				totalCount = rs.getInt("COUNT(*)");
+			}
+		} finally {
+			if (rs != null) {
+				rs.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+		return totalCount;
+	}
 	
 }

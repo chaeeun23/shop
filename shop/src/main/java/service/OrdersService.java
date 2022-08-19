@@ -94,7 +94,7 @@ public class OrdersService {
 	public List<Map<String, Object>> getOrdersListByCustomer(String customerId, int rowPerPage, int currentPage) {
 		List<Map<String, Object>> list = null; 
 
-		int beginRow;
+		int beginRow=0;
 		Connection conn = null;
 		try {
 			conn = new DBUtil().getConnection();
