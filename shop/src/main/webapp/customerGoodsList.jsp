@@ -2,7 +2,7 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="service.CustomerService"%>
+<%@ page import="service.GoodsService"%>
 <%
 //controller 역할 /java
 int rowPerPage = 20;
@@ -14,9 +14,9 @@ if (request.getParameter("currentPage") != null) {
 	rowPerPage = Integer.parseInt(request.getParameter("currentPage"));
 }
 
-CustomerService customerService = new CustomerService();
+GoodsService goodsService = new GoodsService();
 //list
-List<Map<String, Object>> list = customerService.getCustomerGoodsListByPage(rowPerPage, currentPage);
+List<Map<String, Object>> list = goodsService.getCustomerGoodsListByPage(rowPerPage, currentPage);
 %>
 <!-- 분리하면 servlet / 연결기술 forword(request, response) / jsp -->
 <!-- view 역할 -->
@@ -25,13 +25,18 @@ List<Map<String, Object>> list = customerService.getCustomerGoodsListByPage(rowP
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/morph/bootstrap.min.css"
+	integrity="sha512-InMdlCLdAnY6hWsQHiRyh62zyUi7rbdK2Qtwp+QBJFm4fTSzAYCLxMCuaKrUZgbcu9/dX4aZpyy2IPOrQ6n7PA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 	<!-- for / if 대체기술 : 커스텀태그(JSTL & EL) JSP -->
-	<div>
+	<!-- <div>
 		<a href="">인기순</a> <a href="">판매량순</a> <a href="">낮은가격 수</a> <a
 			href="">높은가격 수</a> <a href="">최신순</a>
-	</div>
+	</div> -->
 	<table border="1">
 		<tr>
 			<%

@@ -111,29 +111,8 @@ public class CustomerService {
 		return customer ;
 	}
 	
-	//상품리스트 
-	public List<Map<String, Object>> getCustomerGoodsList(int rowPerPage, int currentPage){
-		List<Map<String, Object>> list = null;
-		
-		int beginRow=0;
-		Connection conn = null;
-		try {
-			conn=new DBUtil().getConnection();
-			conn.setAutoCommit(false); // executeUpdate() 실행 시 자동 커밋을 막음
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return list;
-	}
 	
-	//상품 마지막 페이지
+	//마지막 페이지
 	public int getCustomerLastPage(int rowPerPage) {
 		int lastPage = 0;
 		int totalCount = 0;
@@ -172,5 +151,39 @@ public class CustomerService {
 		}
 		return lastPage;
 	}
-	
+	//고객리스트
+	public List<Customer> getCustomerList(int rowPerPage, int currentPage){
+		List<Customer> list = null;
+		Connection conn = null;
+		int beginRow=0;
+		try {
+			conn=new DBUtil().getConnection();
+			conn.setAutoCommit(false);
+			
+			beginRow = (currentPage -1) * rowPerPage;
+			
+			CustomerDao customerDao = new CustomerDao();
+			list=customerDao.selectCustomerList(conn, rowPerPage, beginRow);
+			
+			if(list==null) {
+				throw new Exception();
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace(); // console에 예외메세지 출력
+			try {
+				conn.rollback(); // 예외를 던지지말고 감싸야함
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return list;
+	}
 }

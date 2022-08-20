@@ -114,7 +114,7 @@ public class OrdersDao {
 		return list;
 	}
 
-	// 전체 주문 목록 (관리자만)
+	// 전체 주문 목록 
 	public List<Map<String, Object>> selectOrdersList(Connection conn, int rowPerPage, int beginRow)
 			throws SQLException {
 		List<Map<String, Object>> list = null;

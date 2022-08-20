@@ -86,7 +86,7 @@ table {
 					href="<%=request.getContextPath()%>/admin/adminGoodsList.jsp"
 					class="btn btn-primary">상품관리</a>
 				<!-- 상품목록/등록/수정(품절)/삭제(장바구니,주문이 없는 경우) -->
-				<a href="<%=request.getContextPath()%>/admin/adminOrdersList.jsp"
+				<a href="<%=request.getContextPath()%>/admin/adminOrderList.jsp"
 					class="btn btn-primary">주문관리</a>
 				<!-- 주문목록/수정 -->
 				<a href="<%=request.getContextPath()%>/admin/adminCustomerList.jsp"

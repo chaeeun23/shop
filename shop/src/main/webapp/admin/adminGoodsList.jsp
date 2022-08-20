@@ -177,7 +177,7 @@ table {
 							endPage = lastPage;
 						}
 					%>
-					<li class="page-item"><a class="page-link"ㄴ
+					<li class="page-item"><a class="page-link"
 						href="<%=request.getContextPath()%>/admin/adminGoodsList.jsp?currentPage=<%=i%>"><%=i%></a></li>
 					<%
 					}

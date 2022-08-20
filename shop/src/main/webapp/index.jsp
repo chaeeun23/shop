@@ -26,16 +26,7 @@ if (session.getAttribute("loginCustomer") == null && session.getAttribute("login
 	<%=session.getAttribute("id")%>
 	<!-- 로그인 아이디 -->
 	</h3>
-	<a href="<%=request.getContextPath()%>/customerOne.jsp" class="btn btn-secondary">고객정보</a>
-	<%
-	if (session.getAttribute("active") != null && session.getAttribute("active").equals("Y")) {
-	%>
-	<a href="<%=request.getContextPath()%>/admin/adminIndex.jsp" class="btn btn-secondary">관리자용
-		페이지</a>
-	<%
-	}
-	%>
+	<a href="<%=request.getContextPath()%>/customerGoodsList.jsp" class="btn btn-secondary">상품보러가기</a>
 	<a href="<%=request.getContextPath()%>/logout.jsp" class="btn btn-secondary">로그아웃</a>
-
 </body>
 </html>

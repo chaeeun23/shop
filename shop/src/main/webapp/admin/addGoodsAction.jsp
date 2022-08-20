@@ -63,6 +63,6 @@ int max = 10 * 1024 * 1024;
 			}
 			response.sendRedirect(request.getContextPath() + "/admin/addGoodsForm.jsp");
 		} else {
-			response.sendRedirect(request.getContextPath() + "/admin/admingoodsOne.jsp?goodsNo="+goodsNo);
+			response.sendRedirect(request.getContextPath() + "/admin/adminGoodsOne.jsp?goodsNo="+goodsNo);
 		}
 %>
