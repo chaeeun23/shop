@@ -116,7 +116,7 @@ public class CustomerDao {
 	// 고객 리스트
 	public List<Customer> selectCustomerList(Connection conn, int rowPerPage, int beginRow) throws SQLException {
 		List<Customer> list = new ArrayList<Customer>();
-		Customer customer = new Customer();
+		
 		String sql = "SELECT customer_id customerId, customer_name customerName, customer_address customerAddress, customer_detail_address customerDetailAddress, customer_telephone customerTelephone, create_date createDate FROM customer ORDER BY create_date LIMIT ?,?";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -127,6 +127,7 @@ public class CustomerDao {
 			stmt.setInt(2, rowPerPage);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
+				Customer customer = new Customer();
 				customer.setCustomerId(rs.getString("customerId"));
 				customer.setCustomerName(rs.getString("customerName"));
 				customer.setCustomerAddress(rs.getString("customerAddress"));

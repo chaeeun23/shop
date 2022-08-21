@@ -17,6 +17,12 @@ if (request.getParameter("currentPage") != null) {
 GoodsService goodsService = new GoodsService();
 //list
 List<Map<String, Object>> list = goodsService.getCustomerGoodsListByPage(rowPerPage, currentPage);
+
+int lastPage = goodsService.getGoodsLastPage(rowPerPage);
+
+int startPage = ((currentPage - 1) / rowPerPage) * rowPerPage + 1;
+int endPage = (((currentPage - 1) / rowPerPage) + 1) * rowPerPage;
+
 %>
 <!-- 분리하면 servlet / 연결기술 forword(request, response) / jsp -->
 <!-- view 역할 -->
@@ -29,7 +35,11 @@ List<Map<String, Object>> list = goodsService.getCustomerGoodsListByPage(rowPerP
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/morph/bootstrap.min.css"
 	integrity="sha512-InMdlCLdAnY6hWsQHiRyh62zyUi7rbdK2Qtwp+QBJFm4fTSzAYCLxMCuaKrUZgbcu9/dX4aZpyy2IPOrQ6n7PA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<style>
+.pagination {
+	justify-content: flex-end;
+}
+</style>
 </head>
 <body>
 	<!-- for / if 대체기술 : 커스텀태그(JSTL & EL) JSP -->
@@ -74,6 +84,41 @@ List<Map<String, Object>> list = goodsService.getCustomerGoodsListByPage(rowPerP
 		      </tr>
 		   </table>
 		   <!--  페이징 + 상품검색 -->
+		  <div>
+				<!-- 페이지 -->
+				<ul class="pagination">
+					<!-- 이전  -->
+					<%
+					if (currentPage > 1) {
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>customerGoodslist.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
+					<%
+					}
+					%>
+					<%
+					for (int a = startPage; a <= endPage; a++) {
+						if (lastPage < endPage) {
+							endPage = lastPage;
+						}
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>customerGoodslist.jsp?currentPage=<%=a%>"><%=a%></a></li>
+					<%
+					}
+					%>
+					<!-- 다음 -->
+					<%
+					if (currentPage < lastPage) {
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>customerGoodslist.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
+					<%
+					}
+					%>
+				</ul>
+			</div>
+		
 
 </body>
 </html>

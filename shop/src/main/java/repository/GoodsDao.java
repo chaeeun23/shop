@@ -30,27 +30,38 @@ public class GoodsDao {
 			return row;
 		}
 		
-	//고객 상품리스트 페이지에서 사용
+	//고객 상품리스트 
 	public List<Map<String, Object>> selectCustomerGoodsListByPage(Connection conn, int rowPerPage, int beginRow) throws SQLException{
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		//고객의 판매량수가 많은 것 부터
-		String sql="SELECT g.*, t.* FROM goods g LEFT JOIN (SELECT goods_no, SUM(order_quantity) FROM orders GROUP BY goods_no) t g.goods_no = t.goods_no ORDER BY t.";
+		String sql="SELECT g.goods_no goodsNo, g.goods_name goodsName, g.goods_price goodsPrice, gi.filename fileName FROM goods g LEFT JOIN (SELECT goods_no, SUM(order_quantity) sumNum FROM orders GROUP BY goods_no) t ON g.goods_no = t.goods_no INNER JOIN goods_img gi ON g.goods_no = gi.goods_no ORDER BY g.create_date LIMIT ?,?";
 		
-		stmt = conn.prepareStatement(sql);
-		rs=stmt.executeQuery();
-		
-		while(rs.next()) {
-			Map<String, Object> map = new HashMap<String,Object>();
+		try {
+			stmt=conn.prepareStatement(sql);
+			stmt.setInt(1, beginRow);
+			stmt.setInt(2, rowPerPage);
+			rs=stmt.executeQuery();
+			while(rs.next()) {
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("goodsNo", rs.getInt("goodsNo"));
+				map.put("goodsName", rs.getString("goodsName"));
+				map.put("goodsPrice", rs.getInt("goodsPrice"));
+				map.put("fileName", rs.getString("fileName"));
+				
+				list.add(map);
+			}
+		} finally {
+			if (rs != null) {
+		        rs.close();
+		    }
+		    if (stmt != null) {
+		        stmt.close();
+		    }
 		}
-		if(rs != null) {
-			rs.close();
-		}
-		if(stmt != null) {
-			stmt.close();
-		}
-		return list;
+	    
+	    return list;
 	}
 	//상품 수정
 	public int updateGoods(Connection conn, Goods goods) throws SQLException {
@@ -151,7 +162,7 @@ public class GoodsDao {
 	// 상품리스트
 	public List<Goods> selectGoodsListByPage(Connection conn, int rowPerPage, int beginRow) throws SQLException {
 		List<Goods> list = new ArrayList<>();
-		Goods goods = new Goods();
+		
 		String sql = "SELECT goods_no goodsNo, goods_name goodsName, goods_price goodsPrice, update_date updateDate, create_date createDate, sold_out soldOut FROM goods ORDER BY goods_no DESC LIMIT ?,?";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -162,6 +173,7 @@ public class GoodsDao {
 			stmt.setInt(2, rowPerPage);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
+				Goods goods = new Goods();
 				goods.setGoodsNo(rs.getInt("goodsNo"));
 				goods.setGoodsName(rs.getString("goodsName"));
 				goods.setGoodsPrice(rs.getInt("goodsPrice"));

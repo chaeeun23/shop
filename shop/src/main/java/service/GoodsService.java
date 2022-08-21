@@ -213,7 +213,8 @@ public class GoodsService {
 			this.goodsDao = new GoodsDao();
 			beginRow = (currentPage - 1) * rowPerPage;
 			list = goodsDao.selectGoodsListByPage(conn, rowPerPage, beginRow);
-
+			//
+			System.out.println(list);
 			if (list == null) {
 				throw new Exception();
 			}
@@ -286,6 +287,8 @@ public class GoodsService {
 			conn = new DBUtil().getConnection();
 			beginRow = (currentPage - 1) * rowPerPage;
 			list = goodsDao.selectCustomerGoodsListByPage(conn, rowPerPage, beginRow);
+			//
+			System.out.println(list);
 			if (list == null) {
 				throw new Exception();
 			}
