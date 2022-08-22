@@ -117,7 +117,8 @@ table {
 					for (Map<String, Object> m : list) {
 					%>
 					<tr>
-						<td><%=m.get("orderNo")%></td>
+						<td><a
+							href="<%=request.getContextPath()%>/admin/adminOrderOne.jsp?orderNo=<%=m.get("orderNo")%>"><%=m.get("orderNo")%></a></td>
 						<td><%=m.get("customerId")%></td>
 						<td><%=m.get("goodsNo")%></td>
 						<td><%=m.get("goodsName")%></td>
