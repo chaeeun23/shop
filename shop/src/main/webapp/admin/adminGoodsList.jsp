@@ -145,7 +145,7 @@ table {
 									}
 									%>
 								</select>
-								<button type="submit" class="btn btn-primary btn-sm">UPDATE</button>
+								<button type="submit" onClick="alert('수정완료')" class="btn btn-primary btn-sm">UPDATE</button>
 							</form>
 						</td>
 					</tr>

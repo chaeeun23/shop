@@ -81,9 +81,9 @@ table {
 	<hr>
 	<div>
 		<a
-			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>" class="btn btn-outline-primary">수정</a>
+			href="<%=request.getContextPath()%>/admin/updateGoodsForm.jsp?goodsNo=<%=goodsNo%>" onClick="alert('수정완료')" class="btn btn-outline-primary">수정</a>
 		<a
-			href="<%=request.getContextPath()%>/admin/deleteGoods.jsp?goodsNo=<%=goodsNo%>" class="btn btn-outline-danger">삭제</a>
+			href="<%=request.getContextPath()%>/admin/deleteGoods.jsp?goodsNo=<%=goodsNo%>" onClick="alert('삭제완료')" class="btn btn-outline-danger">삭제</a>
 		<a href="<%=request.getContextPath()%>/admin/adminGoodsList.jsp" class="btn btn-outline-secondary">상품목록</a>
 	</div>
 </body>

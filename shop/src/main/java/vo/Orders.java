@@ -7,6 +7,7 @@ public class Orders {
 	private int ordersQuantity;
 	private int ordersPrice;
 	private String ordersAddr;
+	private String ordersDetailAddr;
 	private String ordersState;
 	private String updateDate;
 	private String createDate;
@@ -46,6 +47,12 @@ public class Orders {
 	public void setOrdersAddr(String ordersAddr) {
 		this.ordersAddr = ordersAddr;
 	}
+	public String getOrdersDetailAddr() {
+		return ordersDetailAddr;
+	}
+	public void setOrdersDetailAddr(String ordersDetailAddr) {
+		this.ordersDetailAddr = ordersDetailAddr;
+	}
 	public String getOrdersState() {
 		return ordersState;
 	}
@@ -64,5 +71,7 @@ public class Orders {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
+	
+	
 	
 }

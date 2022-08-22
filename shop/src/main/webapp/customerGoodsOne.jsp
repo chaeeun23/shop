@@ -1,73 +1,111 @@
+<%@page import="service.GoodsService"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+// 값 받기
+int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
+// 디버깅
+System.out.println(goodsNo + " <-- adminGoodsOne/goodsNo");
+
+GoodsService goodsService = new GoodsService();
+
+Map<String, Object> map = goodsService.getGoodsAndImgOne(goodsNo);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.0/morph/bootstrap.min.css"
 	integrity="sha512-InMdlCLdAnY6hWsQHiRyh62zyUi7rbdK2Qtwp+QBJFm4fTSzAYCLxMCuaKrUZgbcu9/dX4aZpyy2IPOrQ6n7PA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
 <style>
-.form-control {
-	width: 30%;
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
 }
 
+.form-control {
+	width: 40%;
+}
 </style>
+</head>
 <body>
 	<div>
-		<h2>고객 회원가입</h2>
-		<!-- id check form -->
-		<div class="form-group">
-			ID체크 <input type="text" name="customerCkId" id="customerCkId"
-				class="form-control">
-			<button type="button" id="idckBtn" class="btn btn-secondary btn-sm">아이디
-				중간검사</button>
-		</div>
-
-		<!-- 고객가입 form -->
-		<form id="customerForm" 
-			action="<%=request.getContextPath()%>/addCustomerAction.jsp"
-			method="post" >
-			<div>
-				<div>
-					customerId <input type="text" name="customerId" id="customerId"
-						readonly="readonly" class="form-control">
-				</div>
-				<div>
-					customerPass <input type="password" name="customerPass"
-						id="customerPass" class="form-control">
-
-				</div>
-				<div>
-					customerName <input type="text" name="customerName"
-						id="customerName" class="form-control">
-				</div>
-				<div>
-					customerAddress <input type="text" name="customerAddress"
-						id="customerAddress" class="form-control" readonly>
-					
-					<button type="button" id="addBtn"
-						onclick="sample2_execDaumPostcode()" class="btn btn-secondary btn-sm">주소검색</button>
-				</div>
-				<div>
-					customerDetailAddress <input type="text" name="customerDetailAddr"
-						id="customerDetailAddr" class="form-control">
-				</div>
-				<div>
-					customerTelephone <input type="text" name="customerTelephone"
-						id="customerTelephone" class="form-control">
-				</div>
-			</div>
-			<hr>
-			<button type="button" id="customerBtn" class="btn btn-outline-info">회원가입</button>
-		</form>
+		<h3><%=session.getAttribute("user")%>
+			-
+			<%=session.getAttribute("name")%>
+		</h3>
+		ID :
+		<%=session.getAttribute("id")%>
 	</div>
-	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+	<hr>
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="btn-group-vertical">
+				<a href="<%=request.getContextPath()%>/customerGoodsList.jsp"
+					class="btn btn-primary">상품목록</a> <a
+					href="<%=request.getContextPath()%>/customerOrdersList.jsp"
+					class="btn btn-primary">주문목록</a>
+				<!-- 상품목록/등록/수정/삭제(주문이 없는경우) -->
+				<a href="<%=request.getContextPath()%>/logout.jsp"
+					class="btn btn-primary">로그아웃</a>
+				<!-- 주문목록/수정 -->
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h3>GOODS DETAIL</h3>
+			<form method="post"
+				action="<%=request.getContextPath()%>/customerOrderAction.jsp"
+				id="formid">
+				<div>
+					<div>
+						NO <input type="text" name="goodsNo"
+							value="<%=map.get("goodsNo")%>" class="form-control" readonly>
+
+					</div>
+					<div>
+						NAME <input type="text" name="goodsName"
+							value="<%=map.get("goodsName")%>" class="form-control" readonly>
+
+					</div>
+					<div>
+						PRICE <input type="text" name="goodsPrice"
+							value="<%=map.get("goodsPrice")%>" class="form-control" readonly>
+
+					</div>
+					<div>
+						IMAGE <img
+							src="<%=request.getContextPath()%>/upload/<%=map.get("filename")%>">
+					</div>
+					<div>
+						QUANTITY <input type="number" name="orderQuantity" min="1"
+							max="10" value="1" class="form-control">
+					</div>
+					<div>
+						ADDRESS <input type="text" name="ordersAddr" id="ordersAddr"
+							class="form-control" readonly>
+
+						<button type="button" id="addBtn"
+							onclick="sample2_execDaumPostcode()"
+							class="btn btn-secondary btn-sm">주소검색</button>
+					</div>
+					<div>
+						DETAILADDRESS <input type="text" name="ordersDetailAddr"
+							id="ordersDetailAddr" class="form-control">
+					</div>
+				</div>
+				<hr>
+				<button type="submit" onClick="alert('주문완료!')"
+					class="btn btn-outline-primary">주문</button>
+			</form>
+		</div>
+	</div>
+		<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer"
 		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
 		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
@@ -136,7 +174,7 @@
 							// document.getElementById("sample2_address").value = addr;
 
 							// $('#addr').val(data.zonecode + ' ' + addr);
-							document.getElementById('customerAddress').value = data.zonecode
+							document.getElementById('ordersAddr').value = data.zonecode
 									+ ' ' + addr;
 
 							// 커서를 상세주소 필드로 이동한다.
@@ -177,45 +215,6 @@
 					+ 'px';
 		}
 	</script>
+	
 </body>
-<script>
-	$('#customerBtn').click(function() {
-		if ($('#customerId').val() == '') {
-			alert('고객아이디를 입력하세요');
-		} else if ($('#customerPass').val() == '') {
-			alert('고객패스워드를 입력하세요');
-		} else if ($('#customerName').val() == '') {
-			alert('고객이름을 입력하세요');
-		} else if ($('#customerAddress').val() == '') {
-			alert('고객주소를 입력하세요');
-		} else if ($('#customerTelephone').val() == '') {
-			alert('고객전화번호를 입력하세요');
-		} else {
-			customerForm.submit();
-		}
-	});
-	//아이디중복검사
-	$('#idckBtn').click(function() {
-		if ($('#customerCkId').val().length < 4) {
-			alert('ID는 4자 이상 입니다.');
-		} else {
-			$.ajax({
-				url : '/shop/idckController',
-				type : 'post',
-				data : {
-					customerCkId : $('#customerCkId').val()
-				},
-				success : function(json) {
-					if (json == 'y') {
-						alert('사용가능한 아이디 입니다.');
-						$('#customerId').val($('#customerCkId').val());
-					} else {
-						alert('이미 사용중인 아이디 입니다.');
-						$('#customerId').val('');
-					}
-				}
-			});
-		}
-	});
-</script>
 </html>

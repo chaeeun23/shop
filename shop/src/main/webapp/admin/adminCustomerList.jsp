@@ -76,7 +76,7 @@ table {
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-3">
 			<div class="btn-group-vertical">
 				<a href="<%=request.getContextPath()%>/admin/adminEmployeeIndex.jsp"
 					class="btn btn-primary">사원관리</a> <a
