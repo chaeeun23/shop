@@ -70,7 +70,7 @@ int endPage = (((currentPage - 1) / rowPerPage) + 1) * rowPerPage;
 			<div class="btn-group-vertical">
 				<a href="<%=request.getContextPath()%>/customerGoodsList.jsp"
 					class="btn btn-primary">상품목록</a> <a
-					href="<%=request.getContextPath()%>/customerOrdersList.jsp"
+					href="<%=request.getContextPath()%>/customerOrderList.jsp"
 					class="btn btn-primary">주문목록</a>
 				<!-- 상품목록/등록/수정/삭제(주문이 없는경우) -->
 				<a href="<%=request.getContextPath()%>/logout.jsp"

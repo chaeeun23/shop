@@ -29,11 +29,6 @@ lastPage = ordersService.getOrdersLastPage(ROW_PER_PAGE);
 // 페이지 번호에 필요한 변수 계산
 int startPage = ((currentPage - 1) / ROW_PER_PAGE) * ROW_PER_PAGE + 1;
 int endPage = (((currentPage - 1) / ROW_PER_PAGE) + 1) * ROW_PER_PAGE;
-
-if (list == null) {
-	response.sendRedirect(request.getContextPath() + "/admin/adminIndex.jsp");
-	return;
-}
 %>
 <!DOCTYPE html>
 <html>
@@ -83,7 +78,7 @@ table {
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-sm-2">
+		<div class="col-sm-1">
 			<div class="btn-group-vertical">
 				<a href="<%=request.getContextPath()%>/admin/adminEmployeeIndex.jsp"
 					class="btn btn-primary">사원관리</a> <a
@@ -100,7 +95,7 @@ table {
 					class="btn btn-primary">공지관리</a>
 			</div>
 		</div>
-		<div class="col-sm-10">
+		<div class="col-sm-11">
 			<h3>ORDER LIST</h3>
 			<table>
 				<thead>
@@ -122,22 +117,20 @@ table {
 					for (Map<String, Object> m : list) {
 					%>
 					<tr>
-						<td><a
-							href="<%=request.getContextPath()%>/admin/ordersOne.jsp?ordersNo=<%=m.get("ordersNo")%>"><%=m.get("ordersNo")%></a></td>
-						<td><a
-							href="<%=request.getContextPath()%>/admin/customerOrderList.jsp?customerId=<%=m.get("customerId")%>"><%=m.get("customerId")%></a></td>
+						<td><%=m.get("orderNo")%></td>
+						<td><%=m.get("customerId")%></td>
 						<td><%=m.get("goodsNo")%></td>
 						<td><%=m.get("goodsName")%></td>
 						<td><%=m.get("orderQuantity")%></td>
-						<td><%=m.get("ordersPrice")%></td>
-						<td><%=m.get("ordersAddress")%></td>
-						<td><%=m.get("orderDetailAddress")%></td>
+						<td><%=m.get("orderPrice")%></td>
+						<td><%=m.get("orderAddr")%></td>
+						<td><%=m.get("orderDetailAddr")%></td>
 						<td>
 							<form
-								action="<%=request.getContextPath()%>/admin/updateOrdersStateAction.jsp"
+								action="<%=request.getContextPath()%>/admin/modifyOrdersStateAction.jsp"
 								method="post">
 								<input type="hidden" name="orderNo"
-									value="<%=m.get("ordersNo")%>"> <select
+									value="<%=m.get("orderNo")%>"> <select
 									name="orderState" class="form-select">
 									<%
 									if (m.get("orderState").equals("입금전")) {
@@ -171,7 +164,7 @@ table {
 									}
 									%>
 								</select>
-								<button type="submit" class="btn btn-primary btn-sm">UPDATE</button>
+								<button type="submit" class="btn btn-primary btn-sm" onClick="alert('수정완료')">UPDATE</button>
 							</form>
 						</td>
 						<td><%=m.get("createDate")%></td>
@@ -182,43 +175,43 @@ table {
 				</tbody>
 			</table>
 
-		<div>
-			<!-- 페이지 -->
-			<ul class="pagination">
-				<!-- 이전  -->
-				<%
-				if (currentPage > 1) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
-				<%
-				}
-				%>
-
-				<!-- 페이지번호 -->
-				<%
-				for (int i = startPage; i <= endPage; i++) {
-					if (lastPage < endPage) {
-						endPage = lastPage;
+			<div>
+				<!-- 페이지 -->
+				<ul class="pagination">
+					<!-- 이전  -->
+					<%
+					if (currentPage > 1) {
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=currentPage - 1%>">이전</a></li>
+					<%
 					}
-				%>
-				<li class="page-item"><a class="page-link"
-					href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=i%>"><%=i%></a></li>
-				<%
-				}
-				%>
-				<!-- 다음 -->
-				<%
-				if (currentPage < lastPage) {
-				%>
-				<li class="page-item"><a class="page-link"
-					href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
-				<%
-				}
-				%>
-			</ul>
+					%>
+
+					<!-- 페이지번호 -->
+					<%
+					for (int i = startPage; i <= endPage; i++) {
+						if (lastPage < endPage) {
+							endPage = lastPage;
+						}
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=i%>"><%=i%></a></li>
+					<%
+					}
+					%>
+					<!-- 다음 -->
+					<%
+					if (currentPage < lastPage) {
+					%>
+					<li class="page-item"><a class="page-link"
+						href="<%=request.getContextPath()%>/admin/adminOrderList.jsp?currentPage=<%=currentPage + 1%>">다음</a></li>
+					<%
+					}
+					%>
+				</ul>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

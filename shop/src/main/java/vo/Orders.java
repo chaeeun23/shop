@@ -1,21 +1,21 @@
 package vo;
 
 public class Orders {
-	private int ordersNo;
+	private int orderNo;
 	private int goodsNo;
 	private String customerId;
-	private int ordersQuantity;
-	private int ordersPrice;
-	private String ordersAddr;
-	private String ordersDetailAddr;
-	private String ordersState;
+	private int orderQuantity;
+	private int orderPrice;
+	private String orderAddr;
+	private String orderDetailAddr;
+	private String orderState;
 	private String updateDate;
 	private String createDate;
-	public int getOrdersNo() {
-		return ordersNo;
+	public int getOrderNo() {
+		return orderNo;
 	}
-	public void setOrdersNo(int ordersNo) {
-		this.ordersNo = ordersNo;
+	public void setOrderNo(int ordersNo) {
+		this.orderNo = ordersNo;
 	}
 	public int getGoodsNo() {
 		return goodsNo;
@@ -29,35 +29,35 @@ public class Orders {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	public int getOrdersQuantity() {
-		return ordersQuantity;
+	public int getOrderQuantity() {
+		return orderQuantity;
 	}
-	public void setOrdersQuantity(int ordersQuantity) {
-		this.ordersQuantity = ordersQuantity;
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
 	}
-	public int getOrdersPrice() {
-		return ordersPrice;
+	public int getOrderPrice() {
+		return orderPrice;
 	}
-	public void setOrdersPrice(int ordersPrice) {
-		this.ordersPrice = ordersPrice;
+	public void setOrderPrice(int orderPrice) {
+		this.orderPrice = orderPrice;
 	}
-	public String getOrdersAddr() {
-		return ordersAddr;
+	public String getOrderAddr() {
+		return orderAddr;
 	}
-	public void setOrdersAddr(String ordersAddr) {
-		this.ordersAddr = ordersAddr;
+	public void setOrderAddr(String orderAddr) {
+		this.orderAddr = orderAddr;
 	}
-	public String getOrdersDetailAddr() {
-		return ordersDetailAddr;
+	public String getOrderDetailAddr() {
+		return orderDetailAddr;
 	}
-	public void setOrdersDetailAddr(String ordersDetailAddr) {
-		this.ordersDetailAddr = ordersDetailAddr;
+	public void setOrderDetailAddr(String orderDetailAddr) {
+		this.orderDetailAddr = orderDetailAddr;
 	}
-	public String getOrdersState() {
-		return ordersState;
+	public String getOrderState() {
+		return orderState;
 	}
-	public void setOrdersState(String ordersState) {
-		this.ordersState = ordersState;
+	public void setOrderState(String orderState) {
+		this.orderState = orderState;
 	}
 	public String getUpdateDate() {
 		return updateDate;
@@ -70,6 +70,13 @@ public class Orders {
 	}
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+	}
+	@Override
+	public String toString() {
+		return "Orders [orderNo=" + orderNo + ", goodsNo=" + goodsNo + ", customerId=" + customerId
+				+ ", orderQuantity=" + orderQuantity + ", orderPrice=" + orderPrice + ", orderAddr=" + orderAddr
+				+ ", orderDetailAddr=" + orderDetailAddr + ", orderState=" + orderState + ", updateDate=" + updateDate
+				+ ", createDate=" + createDate + "]";
 	}
 	
 	

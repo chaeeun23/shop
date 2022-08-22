@@ -5,6 +5,7 @@
 <%
 // 값 받기
 int goodsNo = Integer.parseInt(request.getParameter("goodsNo"));
+String customerId = (String)session.getAttribute("id");
 // 디버깅
 System.out.println(goodsNo + " <-- adminGoodsOne/goodsNo");
 
@@ -49,7 +50,7 @@ table {
 			<div class="btn-group-vertical">
 				<a href="<%=request.getContextPath()%>/customerGoodsList.jsp"
 					class="btn btn-primary">상품목록</a> <a
-					href="<%=request.getContextPath()%>/customerOrdersList.jsp"
+					href="<%=request.getContextPath()%>/customerOrderList.jsp"
 					class="btn btn-primary">주문목록</a>
 				<!-- 상품목록/등록/수정/삭제(주문이 없는경우) -->
 				<a href="<%=request.getContextPath()%>/logout.jsp"
@@ -87,7 +88,7 @@ table {
 							max="10" value="1" class="form-control">
 					</div>
 					<div>
-						ADDRESS <input type="text" name="ordersAddr" id="ordersAddr"
+						ADDRESS <input type="text" name="orderAddr" id="orderAddr"
 							class="form-control" readonly>
 
 						<button type="button" id="addBtn"
@@ -95,8 +96,10 @@ table {
 							class="btn btn-secondary btn-sm">주소검색</button>
 					</div>
 					<div>
-						DETAILADDRESS <input type="text" name="ordersDetailAddr"
-							id="ordersDetailAddr" class="form-control">
+						DETAILADDRESS <input type="text" name="orderDetailAddr"
+							id="orderDetailAddr" class="form-control">
+							<input type="hidden" type="text" name="orderState" value="입금전">
+							<input type="hidden" type="text" name="customerId" value="<%=customerId%>">
 					</div>
 				</div>
 				<hr>
@@ -174,7 +177,7 @@ table {
 							// document.getElementById("sample2_address").value = addr;
 
 							// $('#addr').val(data.zonecode + ' ' + addr);
-							document.getElementById('ordersAddr').value = data.zonecode
+							document.getElementById('orderAddr').value = data.zonecode
 									+ ' ' + addr;
 
 							// 커서를 상세주소 필드로 이동한다.
