@@ -85,4 +85,67 @@ public class NoticeDao {
 			}
 			return row;
 		}
+		//공지수정
+		public int updateNotice(Connection conn, Notice paramNotice) throws SQLException {
+			int row = 0;
+			
+			String sql ="UPDATE notice SET notice_title = ?, notice_content = ?, update_date = NOW() WHERE notice_no = ?";
+			PreparedStatement stmt = null;
+			try {
+				stmt=conn.prepareStatement(sql);
+				stmt.setString(1, paramNotice.getNoticeTitle());
+				stmt.setString(2, paramNotice.getNoticeContent());
+				stmt.setInt(3,  paramNotice.getNoticeNo());
+				row = stmt.executeUpdate();
+			} finally {
+				if (stmt != null) {
+					stmt.close();
+				}
+			}
+			return row;
+		}
+		//공지 상세보기 
+		public Notice selectNotice(Connection conn, int noticeNo) throws SQLException {
+			Notice notice = null;
+			String sql = "SELECT notice_no noticeNo, notice_title noticeTitle, employee_id employeeId, notice_content noticeContent, update_date updateDate, create_date createDate FROM notice WHERE notice_no = ?";
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			try {
+				stmt=conn.prepareStatement(sql);
+				stmt.setInt(1, noticeNo);
+				rs=stmt.executeQuery();
+				while(rs.next()) {
+					notice = new Notice();
+					notice.setNoticeNo(rs.getInt("noticeNo"));
+					notice.setNoticeTitle(rs.getString("noticeTitle"));
+					notice.setEmployeeId(rs.getString("employeeId"));
+					notice.setNoticeContent(rs.getString("noticeContent"));
+					notice.setUpdateDate(rs.getString("updateDate"));
+					notice.setCreateDate(rs.getString("createDate"));
+				}
+			}finally {
+				if(rs!=null) {
+					rs.close();
+				}if(stmt!=null) {
+					stmt.close();
+				}
+			}
+			return notice;
+		}
+		//공지삭제
+		public int deleteNotice(Connection conn, int noticeNo) throws SQLException {
+			int row= 0;
+			String sql = "DELETE FROM notice WHERE notice_no = ?";
+			PreparedStatement stmt = null;
+			try {
+				stmt=conn.prepareStatement(sql);
+				stmt.setInt(1, noticeNo);
+				row = stmt.executeUpdate();
+			} finally {
+				if (stmt != null) {
+					stmt.close();
+				}
+			}
+			return row;
+		}
 }

@@ -155,8 +155,11 @@ table {
 				</tbody>
 			</table>
 			<div>
-				<a href="<%=request.getContextPath()%>/admin/addGoodsForm.jsp"
+			
+			<a href="<%=request.getContextPath()%>/admin/addGoodsForm.jsp"
 					class="btn btn-outline-success">새상품등록</a>
+	
+				
 			</div>
 
 			<div>

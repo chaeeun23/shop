@@ -54,6 +54,9 @@
 					href="<%=request.getContextPath()%>/customerOrderList.jsp"
 					class="btn btn-primary">주문목록</a>
 				<!-- 상품목록/등록/수정/삭제(주문이 없는경우) -->
+				 <a
+					href="<%=request.getContextPath()%>/admin/adminNoticeList.jsp"
+					class="btn btn-primary">공지목록</a>
 				<a href="<%=request.getContextPath()%>/logout.jsp"
 					class="btn btn-primary">로그아웃</a>
 				<!-- 주문목록/수정 -->

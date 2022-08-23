@@ -5,11 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-if (session.getAttribute("loginEmployee") == null && session.getAttribute("active").equals("Y")) {
-	response.sendRedirect(request.getContextPath() + "/index.jsp");
-	return;
-}
-
 //페이징값
 int currentPage = 1;
 if (request.getParameter("currentPage") != null) {
@@ -111,7 +106,8 @@ table {
 					for (Notice n : list) {
 					%>
 					<tr>
-						<td><a href="<%=request.getContextPath()%>/admin/adminNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeNo()%></a></td>
+						<td><a
+							href="<%=request.getContextPath()%>/admin/adminNoticeOne.jsp?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeNo()%></a></td>
 						<td><%=n.getNoticeTitle()%></td>
 						<td><%=n.getEmployeeId()%></td>
 						<td><%=n.getUpdateDate()%></td>
@@ -159,7 +155,11 @@ table {
 					%>
 				</ul>
 			</div>
-			<a href="<%=request.getContextPath()%>/admin/adminInsertNoticeForm.jsp" class="btn btn-outline-info" >공지작성</a>
+			
+			<a
+				href="<%=request.getContextPath()%>/admin/adminInsertNoticeForm.jsp"
+				class="btn btn-outline-info">공지작성</a>
+		
 		</div>
 	</div>
 </body>

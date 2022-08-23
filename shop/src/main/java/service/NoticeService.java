@@ -2,10 +2,12 @@ package service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import repository.CustomerDao;
 import repository.NoticeDao;
+import repository.OutIdDao;
 import vo.Notice;
 
 public class NoticeService {
@@ -62,7 +64,7 @@ public class NoticeService {
 
 			beginRow = (currentPage - 1) * rowPerPage;
 
-			NoticeDao noticeDao = new NoticeDao();
+			noticeDao = new NoticeDao();
 			list = noticeDao.selectNoticeList(conn, rowPerPage, beginRow);
 
 			if (list == null) {
@@ -95,7 +97,7 @@ public class NoticeService {
 			conn = new DBUtil().getConnection();
 			conn.setAutoCommit(false);
 
-			NoticeDao noticeDao = new NoticeDao();
+			noticeDao = new NoticeDao();
 			row = noticeDao.insertNotice(conn, paramNotice);
 			if (row == 0) {
 				throw new Exception();
@@ -117,5 +119,98 @@ public class NoticeService {
 		}
 		return row;
 	}
+	//공지수정
+	public int modifyNotice(Notice paramNotice) {
+		int row=0;
+		Connection conn=null;
+		
+		try {
+			conn = new DBUtil().getConnection();
+			conn.setAutoCommit(false);
 
+			NoticeDao noticeDao = new NoticeDao();
+			row = noticeDao.updateNotice(conn, paramNotice);
+			if (row == 0) {
+				throw new Exception();
+			}
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	//공지 상세보기
+	public Notice getNoticeOne(int noticeNo){
+		//
+		System.out.println(noticeNo+" <-- service/noticeNo");
+		Notice notice = new Notice();
+		Connection conn = null;
+		
+		try {
+			conn = new DBUtil().getConnection();
+			noticeDao=new NoticeDao();
+			notice = noticeDao.selectNotice(conn, noticeNo);
+			
+			if(notice==null) {
+				throw new Exception();
+			}
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return notice;
+	}
+	//공지삭제
+	public int removeNotice(Notice paramNotice) {
+		int row = 0;
+		Connection conn=null;
+		try {
+			conn = new DBUtil().getConnection();
+			conn.setAutoCommit(false); // executeUpdate()실행시 자동 커밋 안되게 잠금
+
+			noticeDao = new NoticeDao();
+			row=noticeDao.deleteNotice(conn, paramNotice.getNoticeNo());
+			
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace(); // 예외메세지를 콘솔에 띄움
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
 }
