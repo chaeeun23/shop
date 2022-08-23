@@ -144,7 +144,7 @@ public class EmployeeDao {
 	public Employee selectEmployeeByIdAndPw(Connection conn, Employee login) throws Exception {
 		Employee employee = null;
 
-		String sql = "SELECT employee_id employeeId, employee_name employeeName FROM employee WHERE employee_id = ? AND employee_pass = PASSWORD(?)";
+		String sql = "SELECT employee_id employeeId, employee_pass employeePass, employee_name employeeName, active, create_date createDate FROM employee WHERE employee_id = ? AND employee_pass = PASSWORD(?)";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
@@ -156,7 +156,10 @@ public class EmployeeDao {
 			if (rs.next()) {
 				employee = new Employee();
 				employee.setEmployeeId(rs.getString("employeeId"));
+				employee.setEmployeePass(rs.getString("employeePass"));
 				employee.setEmployeeName(rs.getString("employeeName"));
+				employee.setActive(rs.getString("active"));	
+				employee.setCreateDate(rs.getString("createDate"));
 			}
 		} finally {
 			if (rs != null) {

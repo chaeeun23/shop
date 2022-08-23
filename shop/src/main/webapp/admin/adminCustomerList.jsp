@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%-- 고객관리(고객리스트) --%>
     <%
-if (session.getAttribute("loginEmployee") == null && session.getAttribute("active").equals("Y")) {
+if (session.getAttribute("loginEmployee") == null) {
 	response.sendRedirect(request.getContextPath() + "/index.jsp");
 	return;
 }

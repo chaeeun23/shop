@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("utf-8");
-if (session.getAttribute("loginEmployee") == null && session.getAttribute("active").equals("Y")) {
+if (session.getAttribute("loginEmployee") == null) {
 	response.sendRedirect(request.getContextPath() + "/index.jsp");
 	System.out.println("없음");
 	return;

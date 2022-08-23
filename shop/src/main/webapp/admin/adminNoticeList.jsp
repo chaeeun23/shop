@@ -155,10 +155,16 @@ table {
 					%>
 				</ul>
 			</div>
-			
-			<a
+			<%
+				if (session.getAttribute("loginEmployee") != null && session.getAttribute("active").equals("Y")) {
+				%>
+				<a
 				href="<%=request.getContextPath()%>/admin/adminInsertNoticeForm.jsp"
 				class="btn btn-outline-info">공지작성</a>
+				<%
+				}
+				%>
+			
 		
 		</div>
 	</div>

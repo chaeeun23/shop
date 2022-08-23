@@ -26,14 +26,18 @@ session.setAttribute("loginEmployee", loginEmployee);
 if (session.getAttribute("loginEmployee") == null) { // 로그인실패
 	response.sendRedirect(request.getContextPath() + "/loginForm.jsp?errorMsg=login Fail");
 } else { //로그인성공
-	//
-	System.out.println(employee.getEmployeeName()+"<--employee.getEmployeeName()");
-	session.setAttribute("loginEmployee", loginEmployee);
 	session.setAttribute("user", "employee");
 	session.setAttribute("id", loginEmployee.getEmployeeId());
-	session.setAttribute("pw", employee.getEmployeePass());
+	session.setAttribute("pw", loginEmployee.getEmployeePass());
 	session.setAttribute("name", loginEmployee.getEmployeeName());
-	session.setAttribute("active", employee.getActive());
+	session.setAttribute("active", loginEmployee.getActive());
+	//
+	//
+	System.out.println(session.getAttribute("loginEmployee") + " <--loginEmployee");
+	System.out.println(employee.getActive() + " <--active1");
+	System.out.println(session.getAttribute("active") + " <--active2");
+	
+	
 	response.sendRedirect(request.getContextPath() + "/admin/adminEmployeeIndex.jsp");
 }
 %>

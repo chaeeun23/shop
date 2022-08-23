@@ -26,10 +26,15 @@ session.setAttribute("loginCustomer", loginCustomer);
 if (session.getAttribute("loginCustomer") == null) { // 로그인실패
 	response.sendRedirect(request.getContextPath() + "/loginForm.jsp?errorMsg=login Fail");
 } else { //로그인성공
-	session.setAttribute("loginCustomer", loginCustomer);
+	//session.setAttribute("loginCustomer", loginCustomer);
 	session.setAttribute("user", "customer");
 	session.setAttribute("id", loginCustomer.getCustomerId());
 	session.setAttribute("name", loginCustomer.getCustomerName());
+	
+	//
+	System.out.println(session.getAttribute("id") + " <--id");
+	System.out.println(session.getAttribute("name") + " <--name");
+	
 	response.sendRedirect(request.getContextPath() + "/index.jsp");
 }
 

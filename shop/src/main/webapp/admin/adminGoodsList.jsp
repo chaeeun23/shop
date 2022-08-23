@@ -6,10 +6,15 @@
 	pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("utf-8");
-if (session.getAttribute("loginEmployee") == null && session.getAttribute("active").equals("Y")) {
+
+if (session.getAttribute("loginEmployee") == null) {
 	response.sendRedirect(request.getContextPath() + "/index.jsp");
 	return;
 }
+//
+System.out.println(session.getAttribute("loginEmployee") + "<--session/loginEmployee");
+System.out.println(session.getAttribute("active") + "<--session/active");
+
 // 현재 페이지
 int currentPage = 1;
 int lastPage;
@@ -145,7 +150,8 @@ table {
 									}
 									%>
 								</select>
-								<button type="submit" onClick="alert('수정완료')" class="btn btn-primary btn-sm">UPDATE</button>
+								<button type="submit" onClick="alert('수정완료')"
+									class="btn btn-primary btn-sm">UPDATE</button>
 							</form>
 						</td>
 					</tr>
@@ -155,11 +161,16 @@ table {
 				</tbody>
 			</table>
 			<div>
-			
-			<a href="<%=request.getContextPath()%>/admin/addGoodsForm.jsp"
+				<%
+				if (session.getAttribute("loginEmployee") != null && session.getAttribute("active").equals("Y")) {
+				%>
+				<a href="<%=request.getContextPath()%>/admin/addGoodsForm.jsp"
 					class="btn btn-outline-success">새상품등록</a>
-	
-				
+				<%
+				}
+				%>
+
+
 			</div>
 
 			<div>

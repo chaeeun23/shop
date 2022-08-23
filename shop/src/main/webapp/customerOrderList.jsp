@@ -51,6 +51,10 @@ int endPage = (((currentPage - 1) / ROW_PER_PAGE) + 1) * ROW_PER_PAGE;
 	box-sizing: border-box;
 	width: max-content;
 }
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
 </style>
 </head>
 <body>
